@@ -113,13 +113,15 @@ const KanbanBoard = () => {
     }
 
     return (
-        <div>
-            <GroupSelector
-                onGroupChange={handleGrouping}
-                onSortChange={handleSorting}
-                selectedGrouping={grouping || 'status'}
-                selectedSorting={sorting || 'priority'}
-            />
+        <>
+            <div>
+                <GroupSelector
+                    onGroupChange={handleGrouping}
+                    onSortChange={handleSorting}
+                    selectedGrouping={grouping || 'status'}
+                    selectedSorting={sorting || 'priority'}
+                />
+            </div>
             <div className="kanban-board">
                 {Object.entries(groupedTickets).map(([group, groupTickets]) => (
                     <div key={group} className="kanban-column">
@@ -130,7 +132,7 @@ const KanbanBoard = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 
