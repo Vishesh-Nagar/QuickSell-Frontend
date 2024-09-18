@@ -1,6 +1,6 @@
 import React from 'react';
-import KanbanBoard from './components/KanbanBoard/KanbanBoard';  // Adjusted path for KanbanBoard
-import './App.css';  // Global styles
+import KanbanBoard from './components/KanbanBoard/KanbanBoard';
+import './App.css';
 
 const App = () => {
     return (

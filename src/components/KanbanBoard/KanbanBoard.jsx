@@ -6,33 +6,28 @@ import './KanbanBoard.css';
 const KanbanBoard = () => {
     const [tickets, setTickets] = useState([]);
     const [users, setUsers] = useState({});
-    const [grouping, setGrouping] = useState(null);  // Default to null
-    const [sorting, setSorting] = useState(null);    // Default to null
+    const [grouping, setGrouping] = useState(null);
+    const [sorting, setSorting] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Retrieve saved state from localStorage
         const savedGrouping = localStorage.getItem('grouping');
         const savedSorting = localStorage.getItem('sorting');
 
-        // Apply saved preferences if available
         if (savedGrouping) setGrouping(savedGrouping);
         if (savedSorting) setSorting(savedSorting);
 
-        // Fetch data from API
         fetch('https://api.quicksell.co/v1/internal/frontend-assignment')
             .then(response => response.json())
             .then(data => {
                 const { tickets: ticketsData, users: usersData } = data;
 
-                // Create a mapping from userId to userName
                 const userMapping = usersData.reduce((map, user) => {
                     map[user.id] = user.name;
                     return map;
                 }, {});
 
-                // Map tickets to include userName instead of userId
                 const validatedTickets = ticketsData.map(ticket => ({
                     ...ticket,
                     user: userMapping[ticket.userId] || 'Unknown User'
@@ -49,7 +44,6 @@ const KanbanBoard = () => {
     }, []);
 
     useEffect(() => {
-        // Only save state to localStorage if grouping and sorting are not null
         if (grouping) localStorage.setItem('grouping', grouping);
         if (sorting) localStorage.setItem('sorting', sorting);
     }, [grouping, sorting]);
@@ -120,11 +114,11 @@ const KanbanBoard = () => {
 
     return (
         <div>
-            <GroupSelector 
-                onGroupChange={handleGrouping} 
-                onSortChange={handleSorting} 
-                selectedGrouping={grouping || 'status'}  // Fallback to 'status' if grouping is null
-                selectedSorting={sorting || 'priority'}  // Fallback to 'priority' if sorting is null
+            <GroupSelector
+                onGroupChange={handleGrouping}
+                onSortChange={handleSorting}
+                selectedGrouping={grouping || 'status'}
+                selectedSorting={sorting || 'priority'}
             />
             <div className="kanban-board">
                 {Object.entries(groupedTickets).map(([group, groupTickets]) => (

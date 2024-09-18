@@ -1,6 +1,5 @@
 import React from 'react';
-import './TicketCard.css';  // CSS for styling the ticket cards
-
+import './TicketCard.css';
 const TicketCard = ({ ticket }) => {
     return (
         <div className="ticket-card">
