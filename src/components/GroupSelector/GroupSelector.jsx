@@ -1,12 +1,12 @@
 import React from 'react';
-import './GroupSelector.css';  // CSS for styling the group and sort selectors
+import './GroupSelector.css';
 
-const GroupSelector = ({ onGroupChange, onSortChange, sorting, grouping }) => {
+const GroupSelector = ({ onGroupChange, onSortChange, selectedGrouping, selectedSorting }) => {
     return (
         <div className="group-selector">
             <div className="grouping-options">
                 <label>Group By: </label>
-                <select onChange={(e) => onGroupChange(e.target.value)} defaultValue={grouping}>
+                <select value={selectedGrouping} onChange={(e) => onGroupChange(e.target.value)}>
                     <option value="status">Status</option>
                     <option value="user">User</option>
                     <option value="priority">Priority</option>
@@ -15,7 +15,7 @@ const GroupSelector = ({ onGroupChange, onSortChange, sorting, grouping }) => {
 
             <div className="sorting-options">
                 <label>Sort By: </label>
-                <select onChange={(e) => onSortChange(e.target.value)} defaultValue={sorting} defaultChecked={sorting}>
+                <select value={selectedSorting} onChange={(e) => onSortChange(e.target.value)}>
                     <option value="priority">Priority</option>
                     <option value="title">Title</option>
                 </select>

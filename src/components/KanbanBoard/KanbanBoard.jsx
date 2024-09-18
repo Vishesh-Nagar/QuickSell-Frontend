@@ -6,8 +6,8 @@ import './KanbanBoard.css';
 const KanbanBoard = () => {
     const [tickets, setTickets] = useState([]);
     const [users, setUsers] = useState({});
-    const [grouping, setGrouping] = useState("nset");
-    const [sorting, setSorting] = useState("nset");
+    const [grouping, setGrouping] = useState(null);  // Default to null
+    const [sorting, setSorting] = useState(null);    // Default to null
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -15,22 +15,10 @@ const KanbanBoard = () => {
         // Retrieve saved state from localStorage
         const savedGrouping = localStorage.getItem('grouping');
         const savedSorting = localStorage.getItem('sorting');
-        console.log('getItem')
-        console.log(savedGrouping)
-        console.log(savedSorting)
-        // Apply saved preferences if available
 
-        if (savedGrouping !== "nset") {
-            setGrouping(savedGrouping);
-        } else {
-            setGrouping('Status')
-        }
-        if (savedSorting !== "nset") {
-            console.log("inside if")
-            setSorting(savedSorting);
-        } else {
-            setSorting('Priority')
-        }
+        // Apply saved preferences if available
+        if (savedGrouping) setGrouping(savedGrouping);
+        if (savedSorting) setSorting(savedSorting);
 
         // Fetch data from API
         fetch('https://api.quicksell.co/v1/internal/frontend-assignment')
@@ -61,15 +49,9 @@ const KanbanBoard = () => {
     }, []);
 
     useEffect(() => {
-        // Save grouping and sorting state to localStorage
-        console.log("before save", grouping)
-        console.log("before save", sorting)
-        if (grouping !== "nset") {
-            localStorage.setItem('grouping', grouping);
-        }
-        if (sorting !== "nset") {
-            localStorage.setItem('sorting', sorting);
-        }
+        // Only save state to localStorage if grouping and sorting are not null
+        if (grouping) localStorage.setItem('grouping', grouping);
+        if (sorting) localStorage.setItem('sorting', sorting);
     }, [grouping, sorting]);
 
     const groupByStatus = (tickets) => {
@@ -138,7 +120,12 @@ const KanbanBoard = () => {
 
     return (
         <div>
-            <GroupSelector onGroupChange={handleGrouping} onSortChange={handleSorting} sorting grouping />
+            <GroupSelector 
+                onGroupChange={handleGrouping} 
+                onSortChange={handleSorting} 
+                selectedGrouping={grouping || 'status'}  // Fallback to 'status' if grouping is null
+                selectedSorting={sorting || 'priority'}  // Fallback to 'priority' if sorting is null
+            />
             <div className="kanban-board">
                 {Object.entries(groupedTickets).map(([group, groupTickets]) => (
                     <div key={group} className="kanban-column">
