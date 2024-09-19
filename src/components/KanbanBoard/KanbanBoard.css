@@ -5,14 +5,18 @@
     padding: 20px;
     background-color: #f4f5f9;
 }
-
+.grpPra{
+    display: flex;
+    justify-content: start;
+    padding: 10px;
+}
 .kanban-column {
     flex: 1;
     margin: 0 10px;
     background-color: #ffffff;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 7.5px rgba(0, 0, 0, 0.1);
 }
 
 .kanban-column h2 {
@@ -31,7 +35,7 @@
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 7.5px rgba(0, 0, 0, 0.15);
 }
 
 .ticket-card h3 {
