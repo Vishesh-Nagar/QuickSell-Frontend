@@ -13,7 +13,15 @@
     cursor: pointer;
     border-radius: 8px;
     font-size: 30px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.display-icon {
+    width: 24px;
+    height: 24px;
+    margin: 8px 10px;
 }
 
 .display-button:hover {
@@ -22,16 +30,72 @@
 
 .dropdown-menu {
     position: absolute;
-    background-color: white;
+    background-color: #f9f9f9;
     border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
     z-index: 1;
     margin-top: 10px;
-    width: 160px;
+    width: 180px;
     border-radius: 10px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
 }
 
-.grouping-options, .sorting-options {
+.group-selector .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.grouping-options,
+.sorting-options {
+    font-size: 16px;
+}
+
+.grouping-options label,
+.sorting-options label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 8px;
+}
+
+select.group-selector,
+select.sort-selector {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+select.group-selector:hover,
+select.sort-selector:hover {
+    border-color: #888;
+}
+
+select.group-selector:focus,
+select.sort-selector:focus {
+    outline: none;
+    border-color: #555;
+}
+
+.dropdown-menu:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 600px) {
+    .dropdown-menu {
+        width: 100%;
+    }
+}
+
+.grouping-options,
+.sorting-options {
     font-size: 20px;
 }
