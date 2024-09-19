@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './GroupSelector.css';
-import displayIcon from '../../assets/Display.svg'; // Import the SVG as an image
+import displayIcon from '../../assets/Display.svg';
 
 const GroupSelector = ({ onGroupChange, onSortChange, selectedGrouping, selectedSorting }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +22,7 @@ const GroupSelector = ({ onGroupChange, onSortChange, selectedGrouping, selected
     return (
         <div className="group-selector">
             <button className="display-button" onClick={handleButtonClick}>Display
-                <img src={displayIcon} alt="Display Icon" className="display-icon" /> {/* Use img tag */}
+                <img src={displayIcon} alt="Display Icon" className="display-icon" />
             </button>
             {isOpen && (
                 <div className="dropdown-menu">
