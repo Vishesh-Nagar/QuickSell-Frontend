@@ -114,7 +114,7 @@ const KanbanBoard = () => {
 
     return (
         <>
-            <div>
+            <div className='grpPra'>
                 <GroupSelector
                     onGroupChange={handleGrouping}
                     onSortChange={handleSorting}
